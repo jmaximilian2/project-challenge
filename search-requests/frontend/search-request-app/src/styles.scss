@@ -1,12 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import 'theme.scss';
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .column {
@@ -18,8 +21,13 @@ body {
   display: flex;
 }
 
-.centered{
+.centered {
   justify-content: center;
+}
+
+.panel {
+  background-color: mat-color($mat-accent, lighter);
+  padding: 25px 0;
 }
 
 .material-icons {
