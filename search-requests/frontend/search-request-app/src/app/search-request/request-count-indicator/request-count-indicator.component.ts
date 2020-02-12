@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SearchRequestService } from '../search-request.service';
 import { SearchRequest } from '../search-request.model';
 
@@ -8,21 +8,10 @@ import { SearchRequest } from '../search-request.model';
   styleUrls: ['./request-count-indicator.component.scss']
 })
 export class RequestCountIndicatorComponent implements OnInit {
-  requestCount = 0;
-  searchRequests: SearchRequest[] = [];
+  @Input() requestCount = 0;
 
-  constructor(private searchRequestService: SearchRequestService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.loadRequests();
-  }
-
-  private loadRequests() {
-    this.searchRequestService
-      .querySearchRequests()
-      .subscribe((requests: [SearchRequest]) => {
-        this.requestCount = requests.length;
-        this.searchRequests = requests;
-      });
   }
 }

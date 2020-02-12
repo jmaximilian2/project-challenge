@@ -1,0 +1,101 @@
+<mat-dialog-content>
+  <form [formGroup]="searchRequestForm">
+    <h4>Personal Information</h4>
+    <div class="row">
+      <mat-form-field class="pd-r-15">
+        <input
+          type="text"
+          matInput
+          placeholder="First Name"
+          formControlName="firstName"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Last Name"
+          formControlName="lastName"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="pd-r-15">
+        <input
+          type="email"
+          matInput
+          placeholder="E-Mail"
+          formControlName="mailAddress"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="number"
+          matInput
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+        />
+      </mat-form-field>
+    </div>
+    <h4>Search Criteria</h4>
+    <div class="row">
+      <mat-form-field class="pd-r-15">
+        <input
+          type="text"
+          matInput
+          placeholder="City"
+          formControlName="city"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="full-width">
+        <mat-label>Districts</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="List of Districts separated by comma"
+          formControlName="districts"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="pd-r-15">
+        <input
+          type="number"
+          matInput
+          placeholder="Min. Size"
+          formControlName="minSize"
+          [min]="0"
+        />
+        <span matSuffix>m²</span>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="number"
+          matInput
+          placeholder="Max. Price"
+          formControlName="maxPrice"
+          [min]="0"
+        />
+        <span matSuffix>€</span>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="full-width">
+        <textarea
+          matInput
+          placeholder="Comment"
+          formControlName="comment"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="primary" [disabled]="searchRequestForm.invalid" (click)="onSaveClicked()">Save</button>
+</mat-dialog-actions>
