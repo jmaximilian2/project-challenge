@@ -28,20 +28,20 @@ public class SearchRequest {
     private Integer minSize;
 
     @NotNull
-    private String mailAdress;
+    private String mailAddress;
 
     private String phoneNumber;
 
     private String comment;
 
-    public SearchRequest(@NotNull String firstName, @NotNull String lastName, @NotNull String city, List<String> districts, Integer maxPrice, Integer minSize, @NotNull String mailAdress, String phoneNumber, String comment) {
+    public SearchRequest(@NotNull String firstName, @NotNull String lastName, @NotNull String city, List<String> districts, Integer maxPrice, Integer minSize, @NotNull String mailAddress, String phoneNumber, String comment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.districts = districts;
         this.maxPrice = maxPrice;
         this.minSize = minSize;
-        this.mailAdress = mailAdress;
+        this.mailAddress = mailAddress;
         this.phoneNumber = phoneNumber;
         this.comment = comment;
     }
@@ -77,8 +77,8 @@ public class SearchRequest {
         return minSize;
     }
 
-    public String getMailAdress() {
-        return mailAdress;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
     public String getPhoneNumber() {
@@ -100,7 +100,7 @@ public class SearchRequest {
                 ", districts=" + districts +
                 ", maxPrice=" + maxPrice +
                 ", minSize=" + minSize +
-                ", mailAdress='" + mailAdress + '\'' +
+                ", mailAddress='" + mailAddress + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
