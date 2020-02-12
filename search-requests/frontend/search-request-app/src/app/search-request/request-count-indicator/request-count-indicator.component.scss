@@ -1,0 +1,15 @@
+@import "~@angular/material/theming";
+@import "../../../theme";
+
+.indicator-button{
+
+  .counter-row{
+    font-size: 75px;
+    line-height: 75px;
+    justify-content: center;
+    .material-icons{
+      font-size: 75px;
+    }
+  }
+
+}
