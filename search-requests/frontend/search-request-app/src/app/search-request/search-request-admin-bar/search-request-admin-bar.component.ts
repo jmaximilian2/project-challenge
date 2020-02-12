@@ -24,8 +24,10 @@ export class SearchRequestAdminBarComponent implements OnInit {
 
   onAddClicked() {
     const dialogRef = this.dialog.open(SearchRequestFormComponent);
-    dialogRef.afterClosed().subscribe(value => {
-      this.loadRequests();
+    dialogRef.afterClosed().subscribe((searchRequestAdded: boolean) => {
+      if (searchRequestAdded) {
+        this.loadRequests();
+      }
     });
   }
 

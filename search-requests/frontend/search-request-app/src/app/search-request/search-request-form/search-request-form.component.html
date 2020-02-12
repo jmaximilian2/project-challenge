@@ -1,3 +1,4 @@
+<h3 mat-dialog-title>Create Search Request</h3>
 <mat-dialog-content>
   <form [formGroup]="searchRequestForm">
     <h4>Personal Information</h4>
@@ -96,6 +97,7 @@
     </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="accent" [mat-dialog-close]="false">Cancel</button>
   <button mat-flat-button color="primary" [disabled]="searchRequestForm.invalid" (click)="onSaveClicked()">Save</button>
 </mat-dialog-actions>
