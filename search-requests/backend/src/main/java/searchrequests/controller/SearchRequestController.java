@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/requests")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SearchRequestController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final SearchRequestService searchRequestService;
