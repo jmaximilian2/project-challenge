@@ -1,4 +1,20 @@
 <div class="panel row">
+  <mat-tab-group>
+    <mat-tab label="Filter Search Requests"
+      ><app-search-bar
+        [firstNameField]="true"
+        [lastNameField]="true"
+      ></app-search-bar
+    ></mat-tab>
+    <mat-tab label="Find Suitable Candidate for Apartment">
+      <app-search-bar
+        [cityField]="true"
+        [districtsField]="true"
+        [sizeField]="true"
+        [priceField]="true"
+      ></app-search-bar
+    ></mat-tab>
+  </mat-tab-group>
   <div class="row">
     <app-request-count-indicator
       [requestCount]="requestCount"

@@ -1,5 +1,11 @@
 .panel{
-  justify-content: center;
+  justify-content: space-between;
+}
+
+mat-tab-group{
+  width: 850px;
+  align-self: flex-start;
+  margin: 0 30px;
 }
 
 .add-button{

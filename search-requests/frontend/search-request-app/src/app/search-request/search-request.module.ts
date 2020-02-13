@@ -7,7 +7,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule, MatTabsModule
 } from '@angular/material';
 import { SearchRequestAdminBarComponent } from './search-request-admin-bar/search-request-admin-bar.component';
 import { SearchRequestFormComponent } from './search-request-form/search-request-form.component';
@@ -38,7 +38,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule
   ]
 })
 export class SearchRequestModule {}

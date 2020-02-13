@@ -1,0 +1,32 @@
+<form [formGroup]="queryForm">
+  <div>
+    <mat-form-field *ngFor="let formElem of formTemplate" class="pd-r-15">
+      <div [ngSwitch]="formElem.type">
+        <input
+          *ngSwitchCase="'text'"
+          type="text"
+          matInput
+          placeholder="{{ formElem.label }}"
+          formControlName="{{ formElem.label }}"
+        />
+        <input
+          *ngSwitchCase="'number'"
+          type="number"
+          matInput
+          placeholder="{{ formElem.label }}"
+          formControlName="{{ formElem.label }}"
+          [min]="0"
+        />
+      </div>
+      <span *ngIf="formElem.suffix" matSuffix>{{ formElem.suffix }}</span>
+    </mat-form-field>
+  </div>
+  <button
+    mat-icon-button
+    color="primary"
+    class="search-button"
+    [disabled]="queryForm.invalid"
+  >
+    <i class="material-icons">search</i>
+  </button>
+</form>
