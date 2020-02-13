@@ -34,7 +34,6 @@ export class SearchRequestFormComponent implements OnInit {
   }
 
   onSaveClicked() {
-    this.busy = true;
     const currentSearchRequest = this.getCurrentFormState();
     this.dialogRef.close(currentSearchRequest);
   }

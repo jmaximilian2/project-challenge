@@ -9,7 +9,7 @@ import { SearchRequest } from '../search-request.model';
 })
 export class RequestCountIndicatorComponent implements OnInit {
   @Input() requestCount = 0;
-
+  @Input() label = '';
   constructor() {}
 
   ngOnInit() {

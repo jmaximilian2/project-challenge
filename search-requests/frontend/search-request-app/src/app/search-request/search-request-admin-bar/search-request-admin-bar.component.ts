@@ -9,6 +9,8 @@ import { SearchRequest } from '../search-request.model';
   styleUrls: ['./search-request-admin-bar.component.scss']
 })
 export class SearchRequestAdminBarComponent implements OnInit {
+  indicatorLabel = 'Placed Search Requests';
+
   @Input() requestCount = 0;
   @Output() createRequest = new EventEmitter<SearchRequest>();
   @Output() queryChanged = new EventEmitter<string>();
@@ -17,6 +19,7 @@ export class SearchRequestAdminBarComponent implements OnInit {
   ngOnInit() {}
 
   onQueryChanged(queryString) {
+    this.indicatorLabel = queryString && queryString !== '' ? 'Matching Search Request' : 'Placed Search Requests';
     this.queryChanged.emit(queryString);
   }
 

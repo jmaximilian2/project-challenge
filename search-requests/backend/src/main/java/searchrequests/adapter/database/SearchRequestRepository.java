@@ -1,7 +1,11 @@
 package searchrequests.adapter.database;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import searchrequests.model.SearchRequest;
 
-public interface SearchRequestRepository extends CrudRepository<SearchRequest,Long> {
+@Repository
+public interface SearchRequestRepository extends JpaRepository<SearchRequest, Long>, SearchRequestRepositoryCustom {
+
+
 }

@@ -7,7 +7,6 @@ import searchrequests.adapter.database.SearchRequestRepository;
 import searchrequests.model.SearchRequest;
 import searchrequests.model.exceptions.NotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,9 +33,13 @@ public class SearchRequestService {
     /**
      * @return list of all {@link SearchRequest} stored in the database matching the provided search criteria
      */
-    public List<SearchRequest> querySearchRequests() {
-        List<SearchRequest> result = new ArrayList<>();
-        searchRequestRepository.findAll().forEach(result::add);
+    public List<SearchRequest> querySearchRequests(String firstName,
+                                                   String lastName,
+                                                   String city,
+                                                   String district,
+                                                   Integer price,
+                                                   Integer size) {
+        List<SearchRequest> result = searchRequestRepository.findAllMatchingSearchRequests(firstName, lastName, city, district, price, size);
         log.debug("Found {} search requests matching the given criteria.", result.size());
         return result;
     }

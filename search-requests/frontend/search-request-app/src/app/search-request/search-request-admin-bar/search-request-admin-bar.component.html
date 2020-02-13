@@ -1,12 +1,12 @@
 <div class="panel row">
   <mat-tab-group>
-    <mat-tab label="Filter Search Requests"
-      ><app-search-bar
+    <mat-tab label="Filter Search Requests">
+      <app-search-bar
         [firstNameField]="true"
         [lastNameField]="true"
         (queryChanged)="onQueryChanged($event)"
-      ></app-search-bar
-    ></mat-tab>
+      ></app-search-bar>
+    </mat-tab>
     <mat-tab label="Find Suitable Candidate for Apartment">
       <app-search-bar
         [cityField]="true"
@@ -14,12 +14,13 @@
         [sizeField]="true"
         [priceField]="true"
         (queryChanged)="onQueryChanged($event)"
-      ></app-search-bar
-    ></mat-tab>
+      ></app-search-bar>
+    </mat-tab>
   </mat-tab-group>
   <div class="row">
     <app-request-count-indicator
       [requestCount]="requestCount"
+      [label]="indicatorLabel"
     ></app-request-count-indicator>
     <button
       mat-icon-button

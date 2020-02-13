@@ -67,10 +67,10 @@ export class SearchBarComponent implements OnInit {
     const queryStrings: string[] = [];
     if (
       this.firstNameField &&
-      this.queryForm.get('Frist Name') &&
-      this.queryForm.get('Frist Name').value
+      this.queryForm.get('First Name') &&
+      this.queryForm.get('First Name').value
     ) {
-      queryStrings.push(`firstName=${this.queryForm.get('Frist Name').value}`);
+      queryStrings.push(`firstName=${this.queryForm.get('First Name').value}`);
     }
     if (
       this.lastNameField &&

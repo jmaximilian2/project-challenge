@@ -24,9 +24,15 @@ public class SearchRequestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SearchRequest>> getSearchRequests() {
+    public ResponseEntity<List<SearchRequest>> getSearchRequests(@RequestParam(value = "firstName",required = false) String firstName,
+                                                                 @RequestParam(value = "lastName",required = false) String lastName,
+                                                                 @RequestParam(value = "city",required = false) String city,
+                                                                 @RequestParam(value = "district",required = false) String district,
+                                                                 @RequestParam(value = "price",required = false) Integer price,
+                                                                 @RequestParam(value = "size",required = false) Integer size
+    ) {
         log.debug("GET request for all search request");
-        return ResponseEntity.ok(searchRequestService.querySearchRequests());
+        return ResponseEntity.ok(searchRequestService.querySearchRequests(firstName,lastName,city,district,price,size));
     }
 
     @PutMapping
@@ -43,9 +49,9 @@ public class SearchRequestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity deleteSearchRequest(@PathVariable String id) {
+    public ResponseEntity deleteSearchRequest(@PathVariable Long id) {
         log.debug("DELETE request for search request with id: {}", id);
-        searchRequestService.deleteSearchRequest(Long.parseLong(id));
+        searchRequestService.deleteSearchRequest(id);
         return ResponseEntity.noContent().build();
     }
 }
