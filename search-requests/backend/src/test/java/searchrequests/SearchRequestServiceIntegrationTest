@@ -1,0 +1,43 @@
+package searchrequests;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
+import searchrequests.model.SearchRequest;
+import searchrequests.service.SearchRequestService;
+
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class SearchRequestServiceIntegrationTest {
+    private static SearchRequest r1 = new SearchRequest("Maximilian", "Jelinek", "München", Collections.EMPTY_LIST, 500, 50, "j@test.de", "000", "");
+    private static SearchRequest r2 = new SearchRequest("Manfred", "Albers", "München", Collections.EMPTY_LIST, 500, 50, "j@test.de", "000", "");
+    private static SearchRequest r3 = new SearchRequest("Dieter", "Müller", "München", Collections.EMPTY_LIST, 500, 50, "j@test.de", "000", "");
+
+    @Autowired
+    private TestEntityManager entityManager;
+    @Autowired
+    private SearchRequestService searchRequestService;
+
+    @Test
+    public void querySearchRequestsWithoutParameter() {
+        System.out.println("test");
+        // given
+        entityManager.persist(r1);
+        entityManager.persist(r2);
+        entityManager.flush();
+
+        // when
+        List<SearchRequest> searchRequests = searchRequestService.querySearchRequests(null, null, null, null, null, null);
+
+        // then
+        assertThat(searchRequests.size()).as("returned search request list contains both requests").isEqualTo(2);
+    }
+}
