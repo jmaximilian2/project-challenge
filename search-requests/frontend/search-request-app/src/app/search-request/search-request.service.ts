@@ -16,7 +16,11 @@ export class SearchRequestService {
     return this.http.get<[SearchRequest]>(this.baseUrl);
   }
 
-  createSearchRequest(newSearchRequest: SearchRequest): Observable<null> {
-    return this.http.post<null>(this.baseUrl, newSearchRequest);
+  saveSearchRequest(request: SearchRequest): Observable<null> {
+    return this.http.put<null>(this.baseUrl, request);
+  }
+
+  deleteSearchRequest(id: number): Observable<null> {
+    return this.http.delete<null>(`${this.baseUrl}/${id}`);
   }
 }

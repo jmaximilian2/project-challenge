@@ -6,20 +6,27 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchRequestModule } from './search-request/search-request.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatProgressBarModule
+} from '@angular/material';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatProgressBarModule,
     BrowserAnimationsModule,
     SearchRequestModule,
     HttpClientModule
   ],
-  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose: true, hasBackdrop: true}}],
+  providers: [
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { disableClose: true, hasBackdrop: true }
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

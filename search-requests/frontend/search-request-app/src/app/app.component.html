@@ -1,1 +1,16 @@
-<app-search-request-admin-bar></app-search-request-admin-bar>
+<div class="column content-container">
+  <app-search-request-admin-bar
+    [requestCount]="requestCount"
+    (createRequest)="saveRequest($event)"
+  ></app-search-request-admin-bar>
+  <mat-progress-bar
+    *ngIf="busy"
+    mode="indeterminate"
+    color="primary"
+  ></mat-progress-bar>
+  <app-search-request-table
+    [requests$]="_displayedRequests"
+    (changeRequest)="saveRequest($event)"
+    (deleteRequest)="deleteRequest($event)"
+  ></app-search-request-table>
+</div>

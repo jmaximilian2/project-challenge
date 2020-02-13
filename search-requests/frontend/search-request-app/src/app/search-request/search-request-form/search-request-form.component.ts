@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchRequest } from '../search-request.model';
-import { MatDialogRef } from '@angular/material';
-import { SearchRequestService } from '../search-request.service';
-import { strictEqual } from 'assert';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-search-request-form',
@@ -12,34 +10,33 @@ import { strictEqual } from 'assert';
 })
 export class SearchRequestFormComponent implements OnInit {
   searchRequestForm: FormGroup;
-  busy = false;
+  title;
 
   constructor(
-    private searchRequestService: SearchRequestService,
-    public dialogRef: MatDialogRef<SearchRequestFormComponent>
-  ) {}
+    public dialogRef: MatDialogRef<SearchRequestFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.title = this.data.title;
+  }
 
   ngOnInit() {
-    this.initForm({
-      firstName: undefined,
-      lastName: undefined,
-      city: undefined,
-      districts: undefined,
-      mailAddress: undefined
-    });
+    if (this.data.request) {
+      this.initForm(this.data.request);
+    } else {
+      this.initForm({
+        firstName: undefined,
+        lastName: undefined,
+        city: undefined,
+        districts: undefined,
+        mailAddress: undefined
+      });
+    }
   }
 
   onSaveClicked() {
     this.busy = true;
-    this.searchRequestService
-      .createSearchRequest(this.getCurrentFormState())
-      .subscribe(
-        () => {
-          this.busy = false;
-          this.dialogRef.close(true);
-        },
-        () => (this.busy = false)
-      );
+    const currentSearchRequest = this.getCurrentFormState();
+    this.dialogRef.close(currentSearchRequest);
   }
 
   private initForm(searchRequest: SearchRequest) {
@@ -47,7 +44,9 @@ export class SearchRequestFormComponent implements OnInit {
       firstName: new FormControl(searchRequest.firstName),
       lastName: new FormControl(searchRequest.lastName),
       city: new FormControl(searchRequest.city),
-      districts: new FormControl(searchRequest.districts),
+      districts: new FormControl(
+        searchRequest.districts ? searchRequest.districts.toString() : undefined
+      ),
       maxPrice: new FormControl(searchRequest.maxPrice),
       minSize: new FormControl(searchRequest.minSize),
       mailAddress: new FormControl(searchRequest.mailAddress, [

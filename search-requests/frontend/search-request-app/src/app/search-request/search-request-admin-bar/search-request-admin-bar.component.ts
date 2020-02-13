@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SearchRequestFormComponent } from '../search-request-form/search-request-form.component';
-import { SearchRequestService } from '../search-request.service';
 import { SearchRequest } from '../search-request.model';
 
 @Component({
@@ -10,33 +9,20 @@ import { SearchRequest } from '../search-request.model';
   styleUrls: ['./search-request-admin-bar.component.scss']
 })
 export class SearchRequestAdminBarComponent implements OnInit {
-  requestCount = 0;
-  searchRequests: SearchRequest[] = [];
+  @Input() requestCount = 0;
+  @Output() createRequest = new EventEmitter<SearchRequest>();
+  constructor(private dialog: MatDialog) {}
 
-  constructor(
-    private dialog: MatDialog,
-    private searchRequestService: SearchRequestService
-  ) {}
-
-  ngOnInit() {
-    this.loadRequests();
-  }
+  ngOnInit() {}
 
   onAddClicked() {
-    const dialogRef = this.dialog.open(SearchRequestFormComponent);
-    dialogRef.afterClosed().subscribe((searchRequestAdded: boolean) => {
-      if (searchRequestAdded) {
-        this.loadRequests();
+    const dialogRef = this.dialog.open(SearchRequestFormComponent, {
+      data: { title: 'Create Search Request' }
+    });
+    dialogRef.afterClosed().subscribe((newSearchRequest: SearchRequest) => {
+      if (newSearchRequest) {
+        this.createRequest.emit(newSearchRequest);
       }
     });
-  }
-
-  private loadRequests() {
-    this.searchRequestService
-      .querySearchRequests()
-      .subscribe((requests: [SearchRequest]) => {
-        this.requestCount = requests.length;
-        this.searchRequests = requests;
-      });
   }
 }

@@ -26,15 +26,26 @@ public class SearchRequestController {
     @GetMapping
     public ResponseEntity<List<SearchRequest>> getSearchRequests() {
         log.debug("GET request for all search request");
-        return ResponseEntity.ok(searchRequestService.querySearchRequsts());
+        return ResponseEntity.ok(searchRequestService.querySearchRequests());
     }
 
-    @PostMapping
-    public ResponseEntity createSearchRequest(@Valid @RequestBody SearchRequest newSearchRequest) throws URISyntaxException {
-        log.debug("POST request for new search request: {}", newSearchRequest);
-        SearchRequest storedSearchRequest = searchRequestService.createSearchRequest(newSearchRequest);
-        URI location = new URI("/requests/" + storedSearchRequest.getId());
-        return ResponseEntity.created(location).build();
+    @PutMapping
+    public ResponseEntity saveSearchRequest(@Valid @RequestBody SearchRequest searchRequest) throws URISyntaxException {
+        log.debug("PUT request for search request: {}", searchRequest);
+        if (searchRequest.getId() == null) {
+            SearchRequest storedRequest = searchRequestService.saveSearchRequest(searchRequest);
+            URI location = new URI("/requests/" + storedRequest.getId());
+            return ResponseEntity.created(location).build();
+        } else {
+            searchRequestService.saveSearchRequest(searchRequest);
+            return ResponseEntity.noContent().build();
+        }
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteSearchRequest(@PathVariable String id) {
+        log.debug("DELETE request for search request with id: {}", id);
+        searchRequestService.deleteSearchRequest(Long.parseLong(id));
+        return ResponseEntity.noContent().build();
+    }
 }

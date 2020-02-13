@@ -1,3 +1,15 @@
-app-search-request-admin-bar{
-  padding: 15px 0;
+app-search-request-admin-bar {
+  width: 100%;
+}
+
+app-search-request-table {
+  width: 100%;
+}
+app-search-bar {
+  flex-grow: 1;
+}
+
+.content-container {
+  align-items: center;
+  height: 100%;
 }

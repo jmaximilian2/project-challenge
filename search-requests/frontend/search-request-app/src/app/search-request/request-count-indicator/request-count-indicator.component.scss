@@ -1,14 +1,13 @@
-@import "../../../theme";
+@import '../../../theme';
 
-.indicator-button{
-
-  .counter-row{
+.indicator {
+  color: mat-color($mat-accent, main);
+  .counter-row {
     font-size: 75px;
     line-height: 75px;
     justify-content: center;
-    .material-icons{
+    .material-icons {
       font-size: 75px;
     }
   }
-
 }

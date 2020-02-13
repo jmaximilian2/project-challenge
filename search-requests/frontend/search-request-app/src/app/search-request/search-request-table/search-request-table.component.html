@@ -1,0 +1,38 @@
+<table
+  mat-table
+  matSort
+  matSortActive="firstName"
+  matSortDirection="asc"
+  [dataSource]="dataSource"
+>
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+    <td mat-cell *matCellDef="let request">{{ request.firstName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+    <td mat-cell *matCellDef="let request">{{ request.lastName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+    <td mat-cell *matCellDef="let request">{{ request.city }}</td>
+  </ng-container>
+  <ng-container matColumnDef="districts">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Districts</th>
+    <td mat-cell *matCellDef="let request">{{ request.districts }}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let request">
+      <button mat-icon-button (click)="onDetailClicked(request)">
+        <i class="material-icons">assignment</i>
+      </button>
+      <button mat-icon-button (click)="onDeleteClicked(request)">
+        <i class="material-icons">delete_outline</i>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
