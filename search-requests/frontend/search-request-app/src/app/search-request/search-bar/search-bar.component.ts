@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   @Input() districtsField = false;
   @Input() priceField = false;
   @Input() sizeField = false;
-  @Output() queryChanged = new EventEmitter();
+  @Output() queryChanged = new EventEmitter<string>();
 
   constructor() {}
 
@@ -34,6 +34,10 @@ export class SearchBarComponent implements OnInit {
       queryGroup[template.label] = new FormControl();
     });
     this.queryForm = new FormGroup(queryGroup);
+  }
+
+  applyQuery() {
+    this.queryChanged.emit(this.getCurrentQueryString());
   }
 
   private generateFormTemplate(): any[] {
@@ -57,5 +61,52 @@ export class SearchBarComponent implements OnInit {
       forms.push({ type: 'number', label: 'Price', suffix: '€' });
     }
     return forms;
+  }
+
+  private getCurrentQueryString() {
+    const queryStrings: string[] = [];
+    if (
+      this.firstNameField &&
+      this.queryForm.get('Frist Name') &&
+      this.queryForm.get('Frist Name').value
+    ) {
+      queryStrings.push(`firstName=${this.queryForm.get('Frist Name').value}`);
+    }
+    if (
+      this.lastNameField &&
+      this.queryForm.get('Last Name') &&
+      this.queryForm.get('Last Name').value
+    ) {
+      queryStrings.push(`lastName=${this.queryForm.get('Last Name').value}`);
+    }
+    if (
+      this.cityField &&
+      this.queryForm.get('City') &&
+      this.queryForm.get('City').value
+    ) {
+      queryStrings.push(`city=${this.queryForm.get('City').value}`);
+    }
+    if (
+      this.districtsField &&
+      this.queryForm.get('District') &&
+      this.queryForm.get('District').value
+    ) {
+      queryStrings.push(`district=${this.queryForm.get('District').value}`);
+    }
+    if (
+      this.sizeField &&
+      this.queryForm.get('Size') &&
+      this.queryForm.get('Size').value
+    ) {
+      queryStrings.push(`size=${this.queryForm.get('Size').value}`);
+    }
+    if (
+      this.priceField &&
+      this.queryForm.get('Price') &&
+      this.queryForm.get('Price').value
+    ) {
+      queryStrings.push(`price=${this.queryForm.get('Price').value}`);
+    }
+    return queryStrings.join('&&');
   }
 }

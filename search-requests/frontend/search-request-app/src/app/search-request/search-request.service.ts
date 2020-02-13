@@ -12,8 +12,8 @@ export class SearchRequestService {
 
   constructor(private http: HttpClient) {}
 
-  querySearchRequests(): Observable<[SearchRequest]> {
-    return this.http.get<[SearchRequest]>(this.baseUrl);
+  querySearchRequests(queryString: string = ''): Observable<[SearchRequest]> {
+    return this.http.get<[SearchRequest]>(`${this.baseUrl}?${queryString}`);
   }
 
   saveSearchRequest(request: SearchRequest): Observable<null> {

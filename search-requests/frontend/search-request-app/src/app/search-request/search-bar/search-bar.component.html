@@ -26,6 +26,7 @@
     color="primary"
     class="search-button"
     [disabled]="queryForm.invalid"
+    (click)="applyQuery()"
   >
     <i class="material-icons">search</i>
   </button>

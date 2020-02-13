@@ -11,9 +11,14 @@ import { SearchRequest } from '../search-request.model';
 export class SearchRequestAdminBarComponent implements OnInit {
   @Input() requestCount = 0;
   @Output() createRequest = new EventEmitter<SearchRequest>();
+  @Output() queryChanged = new EventEmitter<string>();
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {}
+
+  onQueryChanged(queryString) {
+    this.queryChanged.emit(queryString);
+  }
 
   onAddClicked() {
     const dialogRef = this.dialog.open(SearchRequestFormComponent, {

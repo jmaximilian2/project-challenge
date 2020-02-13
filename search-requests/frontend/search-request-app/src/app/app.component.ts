@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  onQueryChanged(queryString: string) {
+    this.reloadSearchRequests(queryString);
+  }
+
   deleteRequest(searchRequest: SearchRequest) {
     this.searchRequestService
       .deleteSearchRequest(searchRequest.id)
@@ -42,9 +46,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private reloadSearchRequests() {
+  private reloadSearchRequests(queryString?: string) {
     this.busy = true;
-    this.searchRequestService.querySearchRequests().subscribe(
+    this.searchRequestService.querySearchRequests(queryString).subscribe(
       (requests: SearchRequest[]) => {
         this._displayedRequests.next(requests);
       },

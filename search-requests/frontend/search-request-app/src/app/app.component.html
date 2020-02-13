@@ -2,6 +2,7 @@
   <app-search-request-admin-bar
     [requestCount]="requestCount"
     (createRequest)="saveRequest($event)"
+    (queryChanged)="onQueryChanged($event)"
   ></app-search-request-admin-bar>
   <mat-progress-bar
     *ngIf="busy"
