@@ -20,7 +20,7 @@ public class SearchRequestRepositoryCustomImpl implements SearchRequestRepositor
     }
 
     @Override
-    public List<SearchRequest> findAllMatchingSearchRequests(String firstName, String lastName, String city, String district, Integer price, Integer size) {
+    public List<SearchRequest> findAllMatchingSearchRequests(String firstName, String lastName, String city, Integer price, Integer size) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<SearchRequest> query = builder.createQuery(SearchRequest.class);
         Root<SearchRequest> root = query.from(SearchRequest.class);
@@ -35,14 +35,15 @@ public class SearchRequestRepositoryCustomImpl implements SearchRequestRepositor
         if (city != null && !city.equals("")) {
             predicates.add(builder.equal(root.get("city"), city));
         }
-        if (district != null && !district.equals("")) {
-            predicates.add(builder.equal(root.get("district"), district));
-        }
         if (price != null) {
-            predicates.add(builder.lessThanOrEqualTo(root.get("maxPrice"), price));
+            Predicate isNull = builder.isNull(root.get("maxPrice"));
+            Predicate lessThanOrEqualTo = builder.lessThanOrEqualTo(root.get("maxPrice"), price);
+            predicates.add(builder.or(isNull, lessThanOrEqualTo));
         }
         if (size != null) {
-            predicates.add(builder.greaterThanOrEqualTo(root.get("minSize"), size));
+            Predicate isNull = builder.isNull(root.get("minSize"));
+            Predicate greaterThanOrEqualTo = builder.greaterThanOrEqualTo(root.get("minSize"), price);
+            predicates.add(builder.or(isNull, greaterThanOrEqualTo));
         }
 
         query.where(predicates.toArray(new Predicate[0]));

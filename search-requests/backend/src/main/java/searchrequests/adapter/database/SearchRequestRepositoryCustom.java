@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SearchRequestRepositoryCustom {
 
-    List<SearchRequest> findAllMatchingSearchRequests(String firstName, String lastName, String city, String district, Integer price, Integer size);
+    List<SearchRequest> findAllMatchingSearchRequests(String firstName, String lastName, String city, Integer price, Integer size);
 
 }
