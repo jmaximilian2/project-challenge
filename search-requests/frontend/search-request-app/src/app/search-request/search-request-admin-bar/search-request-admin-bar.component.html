@@ -1,19 +1,19 @@
 <div class="panel row">
-  <mat-tab-group>
+  <mat-tab-group (selectedIndexChange)="onTabindexChanged($event)">
     <mat-tab label="Filter Search Requests">
-      <app-search-bar
-        [firstNameField]="true"
-        [lastNameField]="true"
-        (queryChanged)="onQueryChanged($event)"
+      <app-search-bar *ngIf="currentSearchTabIndex === 0"
+                      [firstNameField]="true"
+                      [lastNameField]="true"
+                      (queryChanged)="onQueryChanged($event)"
       ></app-search-bar>
     </mat-tab>
     <mat-tab label="Find Suitable Candidate for Apartment">
-      <app-search-bar
-        [cityField]="true"
-        [districtsField]="true"
-        [sizeField]="true"
-        [priceField]="true"
-        (queryChanged)="onQueryChanged($event)"
+      <app-search-bar *ngIf="currentSearchTabIndex === 1"
+                      [cityField]="true"
+                      [districtsField]="true"
+                      [sizeField]="true"
+                      [priceField]="true"
+                      (queryChanged)="onQueryChanged($event)"
       ></app-search-bar>
     </mat-tab>
   </mat-tab-group>
